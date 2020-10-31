@@ -1,0 +1,133 @@
+class Solution {
+public:
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) 
+    {
+        queue<int> q;
+        int visited[100];
+        int index = 0;
+        int n=image.size();
+        q.push(sr);
+        q.push(sc);
+        visited[index] = sr;
+        index++;
+        visited[index] = sc;
+        index++;
+        int temp;
+        temp=image[sr][sc];
+        int p1,q1, flag, s;
+        while(!q.empty())
+        {
+            int x=q.front();
+            q.pop();
+            int y=q.front();
+            q.pop();
+            image[x][y]=newColor;
+            p1=x-1;
+            q1=y;
+            flag = 0;
+            if((p1>=0 && p1<image.size()) && (q1>=0 && q1<image[0].size()))
+            {
+                if(image[p1][q1]==temp)
+                {
+                    image[p1][q1]=newColor;
+                    q.push(p1);
+                    q.push(q1);
+                    s = sizeof(visited)/sizeof(visited[0]);
+                    for (int i=0; i < s; i++){
+                        if (visited[i] == p1)
+                        {
+                            flag ++;
+                        }
+                    }
+                    for (int i=0; i < s; i++){
+                        if (visited[i] == q1)
+                        {
+                            flag ++;
+                        }
+                    }                    
+                    if(flag == 2)
+                        break;
+                }
+            }
+            p1=x+1;
+            q1=y;
+            if((p1>=0 && p1<image.size()) && (q1>=0 && q1<image[0].size()))
+            {
+                if(image[p1][q1]==temp)
+                {
+                    image[p1][q1]=newColor;
+                    q.push(p1);
+                    q.push(q1);
+                    s = sizeof(visited)/sizeof(visited[0]);
+                    for (int i=0; i < s; i++){
+                        if (visited[i] == p1)
+                        {
+                            flag ++;
+                        }
+                    }
+                    for (int i=0; i < s; i++){
+                        if (visited[i] == q1)
+                        {
+                            flag ++;
+                        }
+                    }                    
+                    if(flag == 2)
+                        break;
+                }
+            }
+            p1=x;
+            q1=y-1;
+            if((p1>=0 && p1<image.size()) && (q1>=0 && q1<image[0].size()))
+            {
+                if(image[p1][q1]==temp)
+                {
+                    image[p1][q1]=newColor;
+                    q.push(p1);
+                    q.push(q1);
+                    s = sizeof(visited)/sizeof(visited[0]);
+                    for (int i=0; i < s; i++){
+                        if (visited[i] == p1)
+                        {
+                            flag ++;
+                        }
+                    }
+                    for (int i=0; i < s; i++){
+                        if (visited[i] == q1)
+                        {
+                            flag ++;
+                        }
+                    }                    
+                    if(flag == 2)
+                        break;
+                }
+            }
+            p1=x;
+            q1=y+1;
+            if((p1>=0 && p1<image.size()) && (q1>=0 && q1<image[0].size()))
+            {
+                if(image[p1][q1]==temp)
+                {
+                    image[p1][q1]=newColor;
+                    q.push(p1);
+                    q.push(q1);
+                    s = sizeof(visited)/sizeof(visited[0]);
+                    for (int i=0; i < s; i++){
+                        if (visited[i] == p1)
+                        {
+                            flag ++;
+                        }
+                    }
+                    for (int i=0; i < s; i++){
+                        if (visited[i] == q1)
+                        {
+                            flag ++;
+                        }
+                    }                    
+                    if(flag == 2)
+                        break;
+                }
+            }
+        }
+        return image;
+    }
+};
