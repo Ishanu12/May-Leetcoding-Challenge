@@ -1,0 +1,29 @@
+class Solution {
+public:
+    string frequencySort(string s) {
+        int len=s.length();
+        vector<pair<int,char>> v;
+        map<char,int> m;
+        for(int i=0;i<len;i++)
+        {
+            m[s[i]]++;
+        }
+        map<char,int> :: iterator i=m.begin();
+        while(i!=m.end())
+        {
+            v.push_back({i->second,i->first});
+            i++;
+        }
+        sort(v.rbegin(),v.rend());
+        string output="";
+        for(int i=0;i<v.size();i++)
+        {
+            int t=v[i].first;
+            while(t--)
+            {
+                output+=v[i].second;
+            }
+        }
+        return output;
+    }
+};
