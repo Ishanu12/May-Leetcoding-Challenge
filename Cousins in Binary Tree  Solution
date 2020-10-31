@@ -1,0 +1,98 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    bool isCousins(TreeNode* root, int a, int b) 
+    {
+        if (root == NULL) 
+        return false; 
+  
+    // To store parent of node a. 
+        TreeNode* parA = NULL; 
+  
+    // To store parent of node b. 
+       TreeNode* parB = NULL; 
+  
+    // queue to perform level order 
+    // traversal. Each element of 
+    // queue is a pair of node and 
+    // its parent. 
+        queue<pair<TreeNode*, TreeNode*> > q; 
+  
+    // Dummy node to act like parent 
+    // of root node. 
+        TreeNode* tmp = newNode(-1); 
+
+        // To store front element of queue. 
+        pair<TreeNode*, TreeNode*> ele; 
+
+        // Push root to queue. 
+        q.push(make_pair(root, tmp)); 
+        int levSize; 
+
+        while (!q.empty()) { 
+
+            // find number of elements in 
+            // current level. 
+            levSize = q.size(); 
+            while (levSize) { 
+
+                ele = q.front(); 
+                q.pop(); 
+
+                // check if current node is node a 
+                // or node b or not. 
+                if (ele.first->val == a) { 
+                    parA = ele.second; 
+                } 
+
+                if (ele.first->val == b) { 
+                    parB = ele.second; 
+                } 
+
+                // push children of current node 
+                // to queue. 
+                if (ele.first->left) { 
+                    q.push(make_pair(ele.first->left, ele.first)); 
+                } 
+
+                if (ele.first->right) { 
+                    q.push(make_pair(ele.first->right, ele.first)); 
+                } 
+
+                levSize--; 
+
+                // If both nodes are found in 
+                // current level then no need 
+                // to traverse current level further. 
+                if (parA && parB) 
+                    break; 
+            } 
+
+            // Check if both nodes are siblings 
+            // or not. 
+            if (parA && parB) { 
+                return parA != parB; 
+            } 
+
+            // If one node is found in current level 
+            // and another is not found, then 
+            // both nodes are not cousins. 
+            if ((parA && !parB) || (parB && !parA)) { 
+                return false; 
+            } 
+        } 
+
+        return false; 
+    } 
+    
+};
