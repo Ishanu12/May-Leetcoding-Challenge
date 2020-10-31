@@ -1,0 +1,9 @@
+class Solution {
+public:
+    bool isPerfectSquare(int num)
+    {
+        double result;
+        result=pow(num,0.5);
+        return (result-floor(result)==0);
+    }
+};
