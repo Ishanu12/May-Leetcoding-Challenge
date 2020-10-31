@@ -1,0 +1,31 @@
+class Solution {
+public:
+    bool checkStraightLine(vector<vector<int>>& coordinates) {
+        //bool ans=true;
+        int size=coordinates.size();
+       // cout<<size;
+        if(size==2)
+        {
+            return true;
+        }
+        int m=0;
+        int x1=coordinates[0][0];
+        int y1=coordinates[0][1];
+        int x2=coordinates[1][0];
+        int y2=coordinates[1][1];
+       // cout<<x1<<y1<<x2<<y2<<endl;
+        int x3,y3;
+        for(int i=2;i<size;i++)
+        {
+            x3=coordinates[i][0];
+            y3=coordinates[i][1];
+            //cout<<x3<<y3<<endl;
+            if(((y2-y3)*(x1-x2)-(y1-y2)*(x2-x3))!=0)
+            {
+                return false;
+            }
+                
+        }
+        return true;
+    }
+};
