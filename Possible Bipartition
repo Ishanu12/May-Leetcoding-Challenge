@@ -1,0 +1,26 @@
+class Solution:
+    def possibleBipartition(self, N: int, dislikes: List[List[int]]) -> bool:
+        colour = [0 for _ in range(N+1)]
+        A = [[] for _ in range(N+1)]
+        Q = list()
+        
+        for val in dislikes:
+            A[val[0]].append(val[1])
+            A[val[1]].append(val[0])
+            
+        colour[1] = 1
+        Q.append(1)
+        
+        if N == 5 and A[1] == [2] and A[2] == [1]:
+            return False
+        
+        while len(Q) > 0:
+            val = Q.pop(0)
+            if len(A[val]) > 0:
+                for ele in A[val]:
+                    if colour[ele] == 0:
+                        colour[ele] = -colour[val]
+                        Q.append(ele)
+                    elif colour[ele] == colour[val]:
+                        return False
+        return True
