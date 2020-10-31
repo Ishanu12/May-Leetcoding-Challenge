@@ -1,0 +1,29 @@
+#include<string>
+class Solution {
+public:
+    bool canConstruct(string ransomNote, string magazine) {
+        int n1=ransomNote.length();
+        int n2=magazine.length();
+        int flag=0;
+        for(int i=0;i<n1;i++)
+        {
+            for(int j=0;j<n2;j++)
+            {
+                if(magazine[j]==ransomNote[i])
+                {
+                    magazine[j]=0;
+                    flag++;
+                    break;
+                }
+            }
+        }
+        if(flag==n1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+};
