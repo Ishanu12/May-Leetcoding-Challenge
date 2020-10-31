@@ -1,0 +1,40 @@
+class Solution {
+public:
+    int kadane_algo(vector<int>& A)
+    {
+        int n=A.size();
+        int maxima1=INT_MIN;
+        int maxima2=0;
+        for(int i=0;i<n;i++)
+        {
+            if(maxima2<0)
+            {
+                maxima2=A[i];
+            }
+            else
+            {
+                maxima2+=A[i];
+            }
+            maxima1=max(maxima1,maxima2);
+        }
+        return maxima1;
+    }
+    int maxSubarraySumCircular(vector<int>& A)
+    {
+        int n=A.size();
+        int wrap_sum=0;
+        int kadane_sum=kadane_algo(A);
+        if(kadane_sum<0)
+        {
+            return kadane_sum;
+        }
+        for(int i=0;i<n;i++)
+        {
+            wrap_sum+=A[i];
+            A[i]=-A[i];
+        }
+        int y=kadane_algo(A);
+        wrap_sum+=y;
+        return max(wrap_sum,kadane_sum);
+    }
+};
